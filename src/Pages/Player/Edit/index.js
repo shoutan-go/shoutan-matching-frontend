@@ -14,6 +14,8 @@ class FormsElements extends React.Component {
       name: '',
       rating: '',
       club: '',
+      rank: '',
+      times: '',
     }
   }
 
@@ -30,6 +32,8 @@ class FormsElements extends React.Component {
             name: res.resp.name,
             rating: res.resp.rating,
             club: res.resp.club,
+            times: res.resp.times,
+            rank: res.resp.rank,
           })
         } else{
           alert('请呼叫敬思, code:'+res.msg)
@@ -47,7 +51,9 @@ class FormsElements extends React.Component {
         'pin': data.get('pin'),
         'name': data.get('name'),
         'club': data.get('club'),
-        'rating': data.get('rating')
+        'rating': data.get('rating'),
+        'times': data.get('times'),
+        'rank': data.get('rank')
       }),
       headers: {'Content-Type':'application/json'}
     }).then(res => res.json())
@@ -84,6 +90,14 @@ class FormsElements extends React.Component {
                       <Form.Group controlId="formGor">
                         <Form.Label>等级分*</Form.Label>
                         <Form.Control type="number" name="rating" defaultValue={this.state.rating}/>
+                      </Form.Group>
+                      <Form.Group controlId="formGor">
+                        <Form.Label>段级位</Form.Label>
+                        <Form.Control type="text" name="rank" defaultValue={this.state.rank}/>
+                      </Form.Group>
+                      <Form.Group controlId="formGor">
+                        <Form.Label>比赛次数</Form.Label>
+                        <Form.Control type="number" name="times" defaultValue={this.state.times}/>
                       </Form.Group>
                       <Form.Group controlId="formClub">
                         <Form.Label>俱乐部/学校</Form.Label>

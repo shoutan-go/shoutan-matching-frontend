@@ -1,12 +1,14 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
-import { Row, Col, Card, Table, Pagination } from 'react-bootstrap';
+import { Row, Col, Card, Table, Pagination, Button } from 'react-bootstrap';
+import download from 'downloadjs';
 import Aux from "../../../hoc/_Aux";
 
 class BootstrapTable extends React.Component {
 
   constructor(props) {
     super(props);
+    this.columns = ['排名', 'PIN', '姓名', '等级分', '俱乐部/学校', '比赛次数', '上次参加比赛']
     this.state = {
       players: []
     }
@@ -23,8 +25,33 @@ class BootstrapTable extends React.Component {
       })
   }
 
-  render() {
+  handleDownloadExcel(event) {
+    event.preventDefault();
+    if (event.target.className.indexOf('disabled') < 0) {
+      let csv = ''
+      csv += this.columns.join(',')
+      csv += '\n'
+      this.state.players.forEach((item, index) => {
+        csv += index + 1
+        csv += ','
+        csv += item['pin']
+        csv += ','
+        csv += item['name']
+        csv += ','
+        csv += item['rating']
+        csv += ','
+        csv += item['club']
+        csv += ','
+        csv += item['times']
+        csv += ','
+        csv += item['lastMatch']
+        csv += '\n'
+      })
+      download(csv, 'allplayers.csv', 'text/csv')
+    }
+  }
 
+  render() {
     let items = [];
     for (let number = 1; number <= 5; number++) {
       items.push(
@@ -70,6 +97,9 @@ class BootstrapTable extends React.Component {
                     })}
                   </tbody>
                 </Table>
+                <Button variant="primary" onClick={this.handleDownloadExcel.bind(this)} className={this.state.players.length > 0 ? "" : "disabled"}>
+                  下载该表格
+                                    </Button>
                 <Pagination>
                   <Pagination.First />
                   <Pagination.Prev />

@@ -177,7 +177,7 @@ class FormsElements extends React.Component {
                             </tr>
                           </thead>
                           <tbody>
-                            {this.state.participants.filter((e, i) => i % 4 === col).map((item, index) => (
+                            {this.state.participants.filter((e, i) => i % 3 === col).map((item, index) => (
                               <tr key={index}>
                                 <th scope="row">{item.id}</th>
                                 <td>{item.pin}</td>
