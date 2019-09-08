@@ -13,11 +13,11 @@ COPY package.json ./
 COPY yarn.lock ./
 RUN yarn --production=false
 
+COPY nginx.conf /etc/nginx/conf.d/default.conf
 COPY . .
 RUN yarn build
 
 RUN mv build/* /usr/share/nginx/html
-
 EXPOSE 80
 
 CMD ["nginx", "-g", "daemon off;"]
