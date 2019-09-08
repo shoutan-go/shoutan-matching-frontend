@@ -8,7 +8,7 @@ class BootstrapTable extends React.Component {
 
   constructor(props) {
     super(props);
-    this.columns = ['排名', 'PIN', '姓名', '等级分', '俱乐部/学校', '比赛次数', '上次参加比赛']
+    this.columns = ['排名', 'PIN', '姓名', '段级位', '等级分', '俱乐部/学校', '比赛次数', '上次参加比赛']
     this.state = {
       players: []
     }
@@ -37,6 +37,8 @@ class BootstrapTable extends React.Component {
         csv += item['pin']
         csv += ','
         csv += item['name']
+        csv += ','
+        csv += item['rank']
         csv += ','
         csv += item['rating']
         csv += ','
@@ -75,6 +77,7 @@ class BootstrapTable extends React.Component {
                       <th>#</th>
                       <th>PIN</th>
                       <th>姓名</th>
+                      <th>段级位</th>
                       <th>等级分</th>
                       <th>俱乐部/学校</th>
                       <th>比赛次数</th>
@@ -88,6 +91,7 @@ class BootstrapTable extends React.Component {
                         <th scope="row">{index + 1}</th>
                         <td>{item.pin}</td>
                         <td>{item.name}</td>
+                        <td>{item.rank}</td>
                         <td>{item.rating}</td>
                         <td>{item.club}</td>
                         <td>{item.times}</td>
